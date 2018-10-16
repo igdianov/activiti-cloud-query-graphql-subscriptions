@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.activiti.cloud</groupId>
-	<artifactId>activiti-cloud-query-qraphql-ws</artifactId>
+	<artifactId>activiti-cloud-query-graphql-subscriptions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>activiti-cloud-query-qraphql-ws</name>
-	<description>activiti-cloud-query-qraphql-ws</description>
+	<name>activiti-cloud-query-graphql-subscriptions</name>
+	<description>activiti-cloud-query-graphql-subscriptions</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
