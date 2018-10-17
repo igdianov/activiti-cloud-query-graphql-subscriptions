@@ -5,7 +5,7 @@
 global:
   rabbitmq:
     host:
-      value: null
+      value: ""
     username:
       value: guest
     password:
