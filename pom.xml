@@ -24,7 +24,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<activiti.cloud.version>7.0.0.Beta1</activiti.cloud.version>
-		<activiti-cloud-services-query-graphql.version>7.0.5</activiti-cloud-services-query-graphql.version>
+		<activiti-cloud-services-query-graphql.version>7.0.6</activiti-cloud-services-query-graphql.version>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version> <!-- required for jx -->
