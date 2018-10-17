@@ -1,10 +1,33 @@
 # Default values for Maven projects.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
+global:
+  rabbitmq:
+    host:
+      value: null
+    username:
+      value: guest
+    password:
+      value: guest
+    
+## Allows the specification of additional environment variables
+extraEnv: |
+  # - name: ACT_KEYCLOAK_URL
+  #   valueFrom:
+  #     configMapKeyRef:
+  #       name: {{ .Release.Name }}-keycloak-http
+  #       key: expose-keycloak-service-key
+
+javaOpts:
+  xmx: 1024m
+  xms: 512m
+  other: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+  
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: activiti-cloud-query-graphql-subscriptions
+  tag: latest
   pullPolicy: IfNotPresent
 service:
   name: graphql-subscriptions
@@ -13,14 +36,16 @@ service:
   internalPort: 8080
   annotations:
     fabric8.io/expose: "true"
+    fabric8.io/ingress.name: "graphql"
+    fabric8.io/ingress.path: "/ws/graphql/"    
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
 resources:
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 1
+    memory: 2048Mi
   requests:
-    cpu: 400m
-    memory: 512Mi
+    cpu: 1
+    memory: 1024Mi
 probePath: /actuator/health
 livenessProbe:
   initialDelaySeconds: 60
@@ -28,6 +53,7 @@ livenessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 readinessProbe:
+  initialDelaySeconds: 60
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
