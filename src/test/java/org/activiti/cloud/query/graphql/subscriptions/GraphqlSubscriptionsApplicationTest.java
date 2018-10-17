@@ -1,4 +1,4 @@
-package org.activiti.cloud.query.qraphql.subscriptions;
+package org.activiti.cloud.query.graphql.subscriptions;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
