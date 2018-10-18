@@ -26,8 +26,8 @@ javaOpts:
   
 replicaCount: 1
 image:
-  repository: activiti-cloud-query-graphql-subscriptions
-  tag: latest
+  repository: docker.io/introproventures/activiti-cloud-query-graphql-subscriptions
+  tag: 1.0.11
   pullPolicy: IfNotPresent
 service:
   name: graphql-subscriptions
