@@ -7,7 +7,7 @@ RELEASE_VERSION := $(shell cat VERSION)
 RELEASE_ARTIFACT := org.activiti.cloud:$(APP_NAME)
 RELEASE_GREP_EXPR := '^[Rr]elease'
 
-MAKE_HELM := ${MAKE} -C target/charts/$(NAME)
+MAKE_HELM := ${MAKE} -C charts/$(NAME)
 
 .PHONY: ;
 
@@ -71,6 +71,7 @@ preview: .PHONY
 	mvn versions:set -DnewVersion=$(PREVIEW_VERSION)
 	mvn install
 	#${MAKE} skaffold/preview
+	${MAKE_HELM} build
 
 install: .PHONY
 	mvn clean install
