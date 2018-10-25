@@ -28,8 +28,7 @@
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version> <!-- required for jx -->
-		<!-- Stagemonitor -->    
-	  	<stagemonitor.version>0.88.2</stagemonitor.version>
+        <activiti-cloud-services-stagemonitor.version>7.0.0-SNAPSHOT</activiti-cloud-services-stagemonitor.version>
 	</properties>
 
 	<dependencyManagement>
@@ -56,31 +55,11 @@
 	<dependencies>
 	
 		<!-- Stagemonitor -->
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-web-servlet</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-os</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-logging</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-alerting</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-tracing-elasticsearch</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.activiti.cloud</groupId>
+            <artifactId>activiti-cloud-services-stagemonitor</artifactId>
+            <version>${activiti-cloud-services-stagemonitor.version}</version>        
+        </dependency>
 		
 		<!-- Activiti Cloud -->
 		<dependency>
