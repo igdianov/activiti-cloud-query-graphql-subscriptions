@@ -4,7 +4,9 @@ OS := $(shell uname)
 
 RELEASE_BRANCH := master
 RELEASE_VERSION := $(shell cat VERSION)
-RELEASE_ARTIFACT := org.activiti.cloud:$(APP_NAME)
+GROUP_ID := $(shell mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
+ARTIFACT_ID := $(shell mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+RELEASE_ARTIFACT := $(GROUP_ID):$(ARTIFACT_ID)
 RELEASE_GREP_EXPR := '^[Rr]elease'
 
 MAKE_HELM := ${MAKE} -C charts/$(NAME)
