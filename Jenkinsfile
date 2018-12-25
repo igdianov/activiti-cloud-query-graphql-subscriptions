@@ -7,51 +7,8 @@ pipeline {
 	        // Inherit from Jx Maven pod template
 	        inheritFrom "maven"
 	        // Add scheduling configuration to Jenkins builder pod template
-	        yaml """
-spec:
-  nodeSelector:
-    cloud.google.com/gke-preemptible: true
-
-  # It is necessary to add toleration to GKE preemtible pool taint to the pod in order to run it on that node pool
-  tolerations:
-  - key: gke-preemptible
-    operator: Equal
-    value: true
-    effect: NoSchedule
-    
-# Create sidecar container with gsutil to publish chartmuseum index.yaml to Google bucket storage 
-  volumes:
-  - name: gsutil-volume
-    secret:
-      secretName: gsutil-secret
-      items:
-      - key: .boto
-        path: .boto
-  containers:
-  - name: cloud-sdk
-    image: google/cloud-sdk:alpine
-    command:
-    - /bin/sh
-    - -c
-    args:
-    - gcloud config set pass_credentials_to_gsutil false && cat
-    workingDir: /home/jenkins
-    securityContext:
-      privileged: false
-    tty: true
-    resources:
-      requests:
-        cpu: 128m
-        memory: 256Mi
-      limits:
-    volumeMounts:
-      - mountPath: /home/jenkins
-        name: workspace-volume
-      - name: gsutil-volume
-        mountPath: /root/.boto
-        subPath: .boto
-"""        
-	} 
+	        yamlFile "maven-gke-gsutil.yaml"        
+	    } 
     }
     
     environment {
@@ -78,13 +35,16 @@ spec:
         steps {
           container("maven") {
           
-            sh "make preview"
+            sh "make preview-version"
+
+            sh "make install"
             
             //sh "make skaffold/preview"
             
             sh "make helm/preview"
+
+            //sh "make preview"
           }
-          
         }
       }
       stage("Build Release") {
