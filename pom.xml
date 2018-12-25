@@ -1,181 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.activiti.cloud.query</groupId>
-	<artifactId>activiti-cloud-query-graphql-subscriptions</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <groupId>org.activiti.cloud.query</groupId>
+  <artifactId>activiti-cloud-query-graphql-subscriptions</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-	<name>Activiti Cloud :: Query GraphQL Subscriptions</name>
-	<url>http://activiti.org</url>
-	<scm>
-		<url>https://github.com/Activiti/${project.artifactId}</url>
-		<connection>scm:git:https://github.com/Activiti/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:https://github.com/Activiti/${project.artifactId}.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+  <name>Activiti Cloud :: Query GraphQL Subscriptions</name>
+  <url>http://activiti.org</url>
+  <scm>
+    <url>https://github.com/Activiti/${project.artifactId}</url>
+    <connection>scm:git:https://github.com/Activiti/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:https://github.com/Activiti/${project.artifactId}.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 
-	<description>activiti-cloud-query-graphql-subscriptions</description>
+  <description>activiti-cloud-query-graphql-subscriptions</description>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<activiti.cloud.version>7.0.0.Beta2</activiti.cloud.version>
-		<activiti-cloud-services-query-graphql.version>7.0.30</activiti-cloud-services-query-graphql.version>
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-		<maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
-		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version> <!-- required for jx -->
-        <activiti-cloud-services-stagemonitor.version>7.0.2</activiti-cloud-services-stagemonitor.version>
-	</properties>
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <activiti.cloud.version>7.0.120</activiti.cloud.version>
+    <activiti-cloud-services-query-graphql.version>7.0.31</activiti-cloud-services-query-graphql.version>
+    <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+    <maven-failsafe-plugin.version>2.18.1</maven-failsafe-plugin.version>
+    <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version> <!-- required for jx -->
+    <!-- Stagemonitor -->
+    <activiti-cloud-services-stagemonitor.version>7.0.3</activiti-cloud-services-stagemonitor.version>
+  </properties>
 
-	<dependencyManagement>
-		<dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.activiti.cloud.common</groupId>
+        <artifactId>activiti-cloud-services-stagemonitor</artifactId>
+        <version>${activiti-cloud-services-stagemonitor.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.query</groupId>
+        <artifactId>activiti-cloud-services-query-graphql-dependencies</artifactId>
+        <version>${activiti-cloud-services-query-graphql.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.dependencies</groupId>
+        <artifactId>activiti-cloud-dependencies</artifactId>
+        <version>${activiti.cloud.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-			<dependency>
-				<groupId>org.activiti.cloud.query</groupId>
-				<artifactId>activiti-cloud-services-query-graphql-dependencies</artifactId>
-				<version>${activiti-cloud-services-query-graphql.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		
-			<dependency>
-				<groupId>org.activiti.cloud.dependencies</groupId>
-				<artifactId>activiti-cloud-dependencies</artifactId>
-				<version>${activiti.cloud.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+  <dependencies>
+    <!-- Stagemonitor -->
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-stagemonitor</artifactId>
+    </dependency>
 
-	<dependencies>
-	
-		<!-- Stagemonitor -->
-        <dependency>
-            <groupId>org.activiti.cloud.common</groupId>
-            <artifactId>activiti-cloud-services-stagemonitor</artifactId>
-            <version>${activiti-cloud-services-stagemonitor.version}</version>        
-        </dependency>
-		
-		<!-- Activiti Cloud -->
-		<dependency>
-			<groupId>org.activiti.cloud.query</groupId>
-			<artifactId>activiti-cloud-services-query-graphql-ws</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti.cloud.common</groupId>
-			<artifactId>activiti-cloud-services-metadata</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti.cloud.common</groupId>
-			<artifactId>activiti-cloud-services-monitoring</artifactId>
-		</dependency>
-<!-- 
-		<dependency>
-			<groupId>org.activiti.cloud.common</groupId>
-			<artifactId>activiti-cloud-services-tracing</artifactId>
-		</dependency>
- -->		
-		<dependency>
-			<groupId>org.activiti.cloud.common</groupId>
-			<artifactId>activiti-cloud-services-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+    <!-- Activiti Cloud -->
+    <dependency>
+      <groupId>org.activiti.cloud.query</groupId>
+      <artifactId>activiti-cloud-services-query-graphql-ws</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-metadata</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-monitoring</artifactId>
+    </dependency>
+    <!-- <dependency> <groupId>org.activiti.cloud.common</groupId> <artifactId>activiti-cloud-services-tracing</artifactId> 
+      </dependency> -->
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-logging</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<optimize>true</optimize>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.0.5.RELEASE</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>${maven-deploy-plugin.version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven-failsafe-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
+          <optimize>true</optimize>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.0.5.RELEASE</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven-deploy-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M1</version></plugin>
+        <version>3.0.0-M1</version>
+      </plugin>
     </plugins>
-	</build>
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>activiti-snapshots</id>
-			<name>Activiti Snapshots</name>
-			<url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
+  </build>
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>activiti-snapshots</id>
+      <name>Activiti Snapshots</name>
+      <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
 </project>
